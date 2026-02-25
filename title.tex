@@ -1,0 +1,50 @@
+\setkomafont{title}{\Large \scshape}
+\begin{titlepage}
+\begin{center}
+	{\usekomafont{subject}
+	Deggendorf Institute of Technology\\
+	  \faculty\par}
+	\vspace{.2cm}
+{\Large \studies\\}
+% {\Large Studiengang \studies\\}
+\vspace{5.5\baselineskip}
+{\usekomafont{title}\thesistitleEN\par}
+\vspace{1cm}
+{\usekomafont{title}\thesistitleDE\par}
+\vspace{5.5\baselineskip}
+
+\usekomafont{publishers}
+Bachelor thesis  in fulfillment of the requirements for the degree of:
+: % Bachelorarbeit zur Erlangung des akademischen Grades:
+
+	\vspace{.2cm}
+	\emph{\degree}
+	\vspace{.2cm}
+
+at the Deggendorf Institute of Technology\\
+\end{center}
+\vfill
+\parbox[t]{.47\textwidth}{\usekomafont{author}
+	Submitted by:\\
+	\student\\
+	Matriculation Number: \matrnr\par
+	\ifthenelse{\equal{\stammnr}{}}{}{
+	Stammnummer: \stammnr\par
+	}
+    \vspace{.5cm}
+	On: \submissiondate\par
+}
+\hfill
+\parbox[t]{.35\textwidth}{\usekomafont{author}
+Supervisor:\\
+\supervisor%
+
+\ifthenelse{\equal{\secsupervisor}{}}{}
+{%
+\vspace{\baselineskip}
+Ergänzende Prüfende:\\
+\secsupervisor%
+}}
+\end{titlepage}
+\cleardoublepage\par
+% \clearpage\par

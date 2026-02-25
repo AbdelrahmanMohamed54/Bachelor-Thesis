@@ -1,0 +1,159 @@
+\documentclass[a4paper]{scrbook}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{url}
+\usepackage{relsize}
+\usepackage{hyperref}
+\usepackage{libertine}
+\usepackage{ifthen}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{adjustbox}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{xcolor}
+\usepackage{cite} 
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{array}
+\usepackage{textcomp}
+\usepackage{anyfontsize}
+\usepackage{pifont}
+\usepackage{amssymb} 
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{colortbl}
+\usepackage{rotating}   % for \rotatebox
+\usepackage{pdflscape}
+\usepackage{placeins}   % for \FloatBarrier
+\usepackage{multirow}
+\usepackage{svg}
+
+\usepackage{ragged2e}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+
+
+\pgfplotsset{compat=1.18}
+
+
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{orange},
+    commentstyle=\color{gray},
+    frame=single,
+    breaklines=true,
+    columns=flexible,
+    backgroundcolor=\color{gray!5},
+    captionpos=b
+}
+
+
+
+\onehalfspacing  
+\KOMAoptions{open=any}
+
+
+% \usepackage{cite} 
+
+\raggedbottom
+% \usepackage{fancyhdr}
+% \KOMAoptions{open=any}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Replace these values
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\thesistitleEN}{Development and Evaluation of an AI-Based Real-Time Interpretation System with a Feasibility Study on Hardware Integration}
+\newcommand{\thesistitleDE}{Entwicklung und Evaluation eines KI-basierten Echtzeit-Dolmetschsystems mit einer Machbarkeitsstudie zur Hardware-Integration}
+
+\newcommand{\student}{Abdelrahman Mohamed}
+\newcommand{\matrnr}{22201965}
+\newcommand{\stammnr}{} % Unset this variable if you only have a (single) matriculation number
+% \newcommand{\stammnr}{234567} % Unset this variable if you only have a (single) matriculation number
+\newcommand{\submissiondate}{15.\ January 2025}
+\newcommand{\supervisor}{Prof. Dr. Patrick Glauner}
+\newcommand{\secsupervisor}{} % Unset this variable if no second supervisor is required
+% \newcommand{\secsupervisor}{Prof.~Dr.~Zweitprüfer} % Unset this variable if no second supervisor is required
+\newcommand{\faculty}{Faculty of Computer Science}
+
+% Select your course of studies here
+\newcommand{\studies}{Bachelor Artificial Intelligence}
+\newcommand{\degree}{Bachelor of Science (B.Sc.)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand*{\UrlFont}{\ttfamily\smaller\relax}
+
+\begin{document}
+\pagestyle{headings}
+\pagenumbering{roman}
+
+
+% \input{declaration}
+\input{title}
+\begingroup
+\setstretch{1.0}
+%\input{declaration}
+\endgroup
+
+
+\tableofcontents
+\include{chapters/abbreviations}
+\listoftables
+\listoffigures
+
+% \chapter*{Abstract}
+\input{chapters/abstract.tex}
+\addcontentsline{toc}{chapter}{Abstract}
+% \cleardoublepage
+
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+
+\input{chapters/introduction.tex}
+\input{chapters/background.tex}
+% \input{chapters/related-work.tex}
+\input{chapters/methodology.tex}
+\input{chapters/results.tex}
+%\input{chapters/ablations.tex}
+\input{chapters/discussion.tex}
+\input{chapters/hardware.tex}
+\input{chapters/conclusion.tex}
+
+% \chapter*{AI_declaration}
+\input{chapters/AI_declaration.tex}
+\addcontentsline{toc}{chapter}{Declaration of AI-Assisted Content}
+% \cleardoublepage
+
+
+% \bibliographystyle{IEEEtran}
+% \bibliography{references}
+\clearpage
+\appendix
+\makeatletter
+\renewcommand{\@makechapterhead}[1]{%
+  {\parindent \z@ \normalfont
+   \LARGE\bfseries      % <-- \large: change to \normalsize or \small if you want smaller
+   \thechapter\quad #1\par\nobreak\vskip 20pt}}
+\makeatother
+% the above snippet changes the size of the appendix headers
+ \renewcommand{\thechapter}{\Alph{chapter}.}
+\input{chapters/appendix.tex}
+
+\begingroup
+\setstretch{1.0}
+\bibliographystyle{IEEEtran}
+\bibliography{references}
+\endgroup
+
+
+% \nocite{*}
+\end{document}
