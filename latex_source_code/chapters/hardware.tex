@@ -1,0 +1,136 @@
+\chapter{Hardware Integration Feasibility}
+\label{chapter:hardware}
+
+
+\section{Professional Interpretation Environments}
+\label{sec:hardware_context}
+
+The adoption of AI-based simultaneous interpretation systems in real-world settings depends not only on the performance of underlying speech and language models, but also on their ability to integrate with established professional interpretation environments. In practice, simultaneous interpretation is not a purely software-based task. It is embedded within tightly controlled audio workflows that prioritize low latency, reliability, and predictable signal routing. Consequently, hardware integration constitutes a critical factor in determining whether an AI-based interpretation system can move beyond experimental prototypes and be deployed in professional contexts.
+
+Traditional interpretation workflows have evolved over decades to support demanding use cases such as international conferences, governmental proceedings, and large multilingual events \cite{conference_interpreting_new_tech}. These environments are characterized by strict operational requirements, including continuous operation over long sessions, support for multiple target languages in parallel, and seamless delivery of interpreted audio to distributed audiences \cite{gencheva2023features}. Any alternative or complementary interpretation solution must therefore align with these constraints in order to be considered viable for real-world adoption.
+
+From this perspective, hardware integration is not an optional extension, but a prerequisite for practical relevance. While many AI-based interpretation systems demonstrate promising results in controlled or software-only settings \cite{he2019streamingarxiv, Aminzadeh2009Advocate, jia2022translatotron2}, their applicability remains limited if they cannot interface with professional audio infrastructure. This feasibility study is motivated by the need to assess whether the proposed AI-based interpretation pipeline can be integrated into such environments at the signal and system level, without requiring changes to existing workflows.
+
+%\subsection*{Professional Interpretation Environments}
+
+Professional interpretation environments typically rely on a combination of specialized hardware components that operate together as a coordinated system \footnote{\url{https://media.boschsecurity.com/fs//media/pt/pb/media/products_1/conference_systems_1/integrus_brochure.pdf}}. At a high level, these environments consist of interpreter workspaces, audio control units, and distribution systems that deliver interpreted speech to listeners with minimal delay. Figure~\ref{fig:signal_chain} illustrates a typical professional interpretation hardware signal chain, highlighting the interaction between core components.
+
+\begin{figure}[!htbp]
+  \centering
+  \includesvg[width=\textwidth]{img/figures/signal_chain.drawio.svg}
+  \caption[Professional Interpretation Hardware Signal Chain]{Typical professional interpretation hardware signal chain}
+  \label{fig:signal_chain}
+\end{figure}
+
+Interpreter booths form the primary workspace for human interpreters. These sound-isolated enclosures are designed to minimize acoustic interference and provide a controlled listening environment. Within each booth, interpreters monitor the source language audio feed and produce spoken translations into a microphone connected to the interpretation console. The booth setup is optimized for sustained concentration and consistent audio quality, both of which are essential for high-quality interpretation.
+
+Interpretation consoles serve as the central control interface for interpreters and audio technicians. These consoles allow interpreters to select input channels, adjust monitoring levels, and route their microphone output to specific language channels. From a system perspective, consoles play a crucial role in managing channel assignments and ensuring that each interpreted language is correctly mapped to its corresponding output stream.
+
+Audio mixers and control units aggregate and manage multiple audio signals within the interpretation system. They combine source audio, interpreted outputs, and auxiliary signals while maintaining precise timing relationships. Mixing and routing decisions are typically performed at the hardware level to guarantee deterministic behavior and low latency, even under high channel counts or extended operation.
+
+Wireless or wired transmission systems are used to distribute interpreted audio to the audience. These systems support multiple parallel language channels and deliver audio to receivers and headsets worn by listeners, allowing each participant to select their preferred language channel. The distribution infrastructure is designed to operate reliably in large venues and to scale with the number of supported languages and listeners.
+
+A defining characteristic of professional interpretation environments is channel-based audio routing. Each language corresponds to a dedicated audio channel that is produced, routed, and distributed independently. While this approach provides clarity and scalability, it also introduces constraints: adding a new language typically requires additional interpreters, booths, and routing capacity. As a result, scalability is bounded by both technical and logistical factors.
+
+%\subsection*{Scalability and Integration Challenges}
+
+Scalability in traditional interpretation systems is inherently limited by their hardware-centric design. Supporting additional target languages increases system complexity, as each language requires its own interpreter, booth, console configuration, and distribution channel \cite{conference_interpreting_new_tech}. These constraints directly impact cost, setup time, and operational flexibility. In dynamic or ad hoc scenarios, such as rapidly changing language requirements or remote participation, traditional systems can be difficult to adapt.
+
+AI-based interpretation systems offer the potential to mitigate some of these limitations by decoupling language processing from physical interpreter availability \cite{ahmed2022technology, ozkaya2023transformative}. However, this potential can only be realized if AI-generated audio outputs can be injected into existing hardware workflows in a manner consistent with professional standards. This includes adherence to standardized audio formats, predictable latency behavior, and compatibility with channel-based routing architectures.
+
+%\subsection*{Scope of the Feasibility Study}
+
+The purpose of this chapter is to assess the feasibility of integrating the proposed AI-based interpretation system into professional interpretation environments from a system and signal-level perspective. The analysis focuses on audio interface compatibility, routing concepts, and deployment scenarios that align with existing workflows. The goal is to determine whether such integration is technically plausible using current technologies and reasonable engineering assumptions.
+
+It is important to emphasize that this study does not aim to certify the system for commercial deployment, nor does it claim compliance with specific regulatory or industry certification standards. Instead, it provides a structured evaluation of integration pathways, identifying both enabling factors and practical constraints. Detailed integration scenarios and proposed deployment approaches are discussed in Section~\ref{sec:integration}, where the interaction between the AI-based pipeline and professional hardware components is examined in greater detail.
+
+By grounding the feasibility analysis in established professional interpretation environments, this chapter establishes a realistic context for evaluating the practical applicability of AI-based simultaneous interpretation systems beyond software-only demonstrations.
+
+
+\section{Audio Interface and Signal Compatibility}
+\label{sec:audio_compatibility}
+
+A prerequisite for integrating an AI-based interpretation system into professional interpretation environments is compatibility at the audio interface and signal level. Regardless of the internal processing pipeline, the system must ultimately produce audio signals that conform to the expectations of established interpretation hardware. This section examines the characteristics of the audio output generated by the proposed system and evaluates its suitability for professional routing and distribution infrastructures.
+
+%\subsection*{Audio Output Characteristics of the Proposed System}
+
+The proposed interpretation system generates synthesized speech output in raw Pulse-Code Modulation (PCM) format. PCM audio is the de facto standard in professional audio environments due to its uncompressed nature, deterministic timing behavior, and broad compatibility with mixing, routing, and transmission equipment. By producing raw PCM signals, the system avoids codec-induced latency and eliminates the need for proprietary decoding stages prior to routing or playback.
+
+All synthesized audio is generated at a fixed sampling rate of 16~kHz with a single audio channel (mono). This configuration reflects common practice in interpretation systems, where speech intelligibility and low latency are prioritized over spatial audio reproduction. Mono speech signals are well suited for interpretation workflows, as they reduce bandwidth requirements and simplify channel-based routing, particularly when multiple target languages must be transmitted concurrently.
+
+The use of a fixed sampling rate and channel configuration ensures predictable timing and simplifies downstream integration \cite{wang2017realtimeaudio}. Professional interpretation hardware typically supports a range of standard sampling rates, including 16~kHz and higher, allowing the generated audio to be routed without resampling or format conversion. This design choice minimizes signal processing overhead and reduces the risk of timing artifacts or synchronization issues.
+
+%\subsection*{Separation of Speech Synthesis and Playback}
+
+A key architectural decision in the proposed system is the explicit separation between speech synthesis and audio playback. The text-to-speech component is responsible solely for generating audio samples, while playback and routing are handled independently by the surrounding system infrastructure. This separation ensures that audio generation is decoupled from presentation logic and avoids tight coupling to specific output devices or software environments \cite{Aminzadeh2009Advocate}.
+
+As a result, the system does not rely on browser-based audio playback or platform-specific sound subsystems for delivering interpreted speech. Instead, synthesized audio streams can be forwarded directly to external audio interfaces or routing frameworks. This design aligns with professional audio workflows, where playback devices, mixers, and distribution systems are managed independently of the content generation process.
+
+%\subsection*{Routing Readiness and Channel-Based Output}
+
+Professional interpretation systems are organized around channel-based audio routing, where each target language corresponds to a dedicated audio channel \cite{rayaa2022remoteSI}. The proposed system is inherently compatible with this paradigm, as it generates independent audio streams for each target language. Each synthesized language output can therefore be mapped directly to a corresponding hardware or virtual audio channel without additional multiplexing or demultiplexing logic.
+
+This channel-oriented output structure enables scalable integration into professional environments. Rather than requiring multiple independent computing devices, one per language channel, the system can deliver multiple language streams from a single processing instance. These streams can then be routed externally using standard audio networking or interface technologies, significantly reducing hardware complexity and deployment cost.
+
+Importantly, the system’s routing readiness does not assume any specific transmission technology at this stage. Whether the audio is forwarded via physical audio interfaces, networked audio protocols, or dedicated routing hardware, the output format remains compatible. This abstraction allows integration strategies to be adapted to different professional environments without modifications to the core interpretation pipeline.
+
+
+By adhering to widely supported audio formats and decoupling synthesis from playback, the proposed system establishes a strong foundation for integration with professional interpretation infrastructures. The system’s ability to generate multiple independent language streams from a single processing instance further enhances its suitability for scalable deployment.
+
+Concrete integration strategies, including the routing of language-specific audio channels into professional wireless distribution systems using networked audio technologies, are discussed in detail in Section~\ref{sec:integration}. There, the focus shifts from signal compatibility to end-to-end deployment scenarios and practical system integration.
+
+
+\section{Proposed System Integration \& Deployment Considerations}
+\label{sec:integration}
+
+Building on the signal compatibility established in Section~\ref{sec:audio_compatibility}, this section examines the main hardware integration scenario for deploying the proposed AI-based interpretation system within professional interpretation environments. Rather than treating latency and reliability as abstract performance metrics, they are analyzed here in the context of concrete system integration designs. This approach allows practical deployment considerations to be evaluated without duplicating the quantitative evaluation presented in Chapter~\ref{chapter:results}.
+
+%\subsection*{AI-Based Interpretation Hardware Integration Scenario}
+
+The primary integration scenario considered in this study involves routing AI-generated interpretation audio directly into a professional wireless language distribution system using networked audio technology, which forwards signals respectively to the hardware architecture specified in Section~\ref{sec:hardware_context}. In this scenario, the AI-based interpretation system operates as a centralized audio source that produces multiple language-specific audio streams, each corresponding to a target language. These streams are then injected into the professional interpretation infrastructure as independent channels.
+
+Within the overall signal chain, the AI system is positioned downstream of the source-language audio capture and upstream of the language distribution subsystem. Source speech is captured using professional microphones and forwarded to the AI-based pipeline for recognition, translation, and synthesis. The resulting synthesized audio for each target language is output as a discrete PCM stream, which is subsequently routed into the interpretation distribution system. This positioning allows the AI system to function analogously to a set of human interpreters, but without requiring physical interpreter booths or dedicated operator consoles for each language.
+
+Audio routing between the AI system and the professional distribution infrastructure is envisaged using Dante \footnote{\url{https://www.getdante.com/meet-dante/what-is-dante/}}, a widely adopted networked audio protocol for professional environments. Dante enables the transmission of uncompressed, low-latency PCM audio over standard Ethernet networks, supporting flexible routing and scalable channel counts. By leveraging such a networked audio layer, each language stream produced by the AI system can be mapped to a corresponding input channel of the interpretation distribution system.
+
+This approach contrasts with more naïve deployment strategies in which each target language would require a separate computing device connected directly to a dedicated transmitter. Such setups are operationally complex, expensive, and difficult to scale, particularly when supporting multiple languages. In the proposed scenario, a single AI processing instance can generate all required language outputs, which are then distributed via standardized audio routing infrastructure. This significantly reduces hardware duplication and simplifies system management.
+
+%\subsection*{Audio Flow and Channel Mapping}
+
+In the proposed integration scenario, audio flow proceeds through a clearly defined sequence of stages. Source-language audio is captured and forwarded to the AI-based pipeline, where speech recognition, segmentation, translation, and synthesis are performed. Each synthesized language output is produced as a continuous mono PCM stream. These streams are exposed as virtual audio outputs subscribed to by the Dante network via the Dante Virtual Soundcard \footnote{\url{https://www.getdante.com/products/software-essentials/dante-virtual-soundcard/}}.
+
+On the Dante layer, each language stream is assigned to a dedicated audio channel and routed to the appropriate input of the professional interpretation system as shown in Figure~\ref{fig:dante_layer}. From there, the distribution infrastructure handles wireless transmission to audience receivers, preserving the existing user experience and channel selection mechanisms. Importantly, this integration does not require modification of the downstream distribution hardware; it relies solely on standard audio routing capabilities.
+
+\begin{figure}[!htbp]
+  \centering
+  \includesvg[width=\textwidth]{img/figures/dante_layer.drawio.svg}
+  \caption[Dante Language Channel Distribution]{A demonstration of the Dante layer showing the routing of language streams into dedicated audio channels via the Dante Virtual Soundcard}
+  \label{fig:dante_layer}
+\end{figure}
+
+
+Because the AI system outputs language streams independently, the mapping between AI-generated languages and distribution channels is explicit and deterministic. This aligns naturally with the channel-based routing model of professional interpretation systems and allows flexible reconfiguration, for example when adding or removing target languages.
+
+\subsection*{Latency \& Reliability Considerations}
+
+Latency in this integration scenario arises from several sources: AI processing within the interpretation pipeline, network transmission over the Dante layer, and internal buffering within the professional distribution system. While the AI-related latency components are evaluated quantitatively in Chapter~\ref{chapter:results}, the integration design itself introduces minimal additional delay.
+
+Dante-based audio routing is designed for real-time professional applications and typically operates with sub-millisecond to low-millisecond latency \footnote{\url{https://www.getdante.com/support/faq/what-is-the-latency-of-dante-virtual-soundcard/}}, depending on configuration and network conditions. As a result, the dominant latency contribution remains the AI processing pipeline rather than the audio transport layer. This property makes networked audio routing suitable for simultaneous interpretation scenarios, where additional transport delay must be kept negligible relative to speech processing latency.
+
+From a system perspective, the centralized generation of multiple language streams also avoids synchronization issues that could arise when using multiple independent devices. All language outputs are generated within a single timing context, simplifying alignment across channels and reducing drift over long sessions.
+
+%\subsection*{Reliability Considerations}
+
+Moreover, reliability in professional interpretation environments is paramount, as interruptions or inconsistencies directly impact audience comprehension. The proposed integration scenario benefits from the inherent robustness of professional audio routing infrastructures, which are designed for continuous operation and fault isolation.
+
+Centralizing AI-based interpretation introduces a single processing point, which can be both an advantage and a limitation. On the one hand, it simplifies monitoring, maintenance, and redundancy strategies \cite{sperber2020endtoendpromise}. On the other hand, it creates a dependency on the availability of the AI system and its network connectivity. From a feasibility standpoint, this suggests that redundant deployment or fallback strategies, such as parallel AI instances or rapid reversion to human interpretation channels, would be desirable in mission-critical settings.
+
+Importantly, the integration scenario preserves the downstream hardware reliability characteristics \cite{conference_interpreting_new_tech}. Once audio enters the professional distribution system, it is handled using established mechanisms that are well understood and widely deployed. This separation of concerns allows reliability risks associated with AI processing to be addressed independently of the distribution infrastructure.
+
+\subsection*{Feasibility Assessment and Open Validation Points}
+
+From a technical standpoint, the proposed integration scenario is feasible with current technologies. The audio formats, channel structure, and routing mechanisms produced by the AI-based system align well with the requirements of professional interpretation hardware. Networked audio protocols provide a practical bridge between software-based interpretation and hardware-based distribution.
+
+However, certain aspects would require further validation in real-world deployments. These include long-term stability under continuous operation, behavior under network congestion or partial failures, and acceptance by operators accustomed to traditional interpretation workflows. Additionally, formal certification and compliance with venue-specific regulations fall outside the scope of this study and would need to be addressed prior to commercial deployment.
+
+Overall, the proposed integration scenario demonstrates that AI-based simultaneous interpretation systems can, in principle, be integrated into professional interpretation environments in a manner that reduces hardware complexity and improves scalability, while preserving established distribution workflows \cite{corpas-pastor-2021-interpreting}. This supports the broader feasibility of deploying such systems beyond experimental or consumer-oriented settings.
