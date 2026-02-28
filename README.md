@@ -88,6 +88,8 @@ This explicitly manages the **latency vs stability trade-off**, a critical chall
 
 The system was evaluated using system-level latency and stability metrics:
 
+All results are documented <a href="https://github.com/AbdelrahmanMohamed54/Bachelor-Thesis/blob/main/complete_final_thesis.pdf">here</a> respectively.
+
 ### Latency Metrics
 
 * Average Lagging (AL)
