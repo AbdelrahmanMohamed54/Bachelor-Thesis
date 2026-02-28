@@ -28,7 +28,7 @@ The system was designed to:
 1. Enable **real-time speech-to-speech interpretation**
 2. Explicitly manage the **latency–stability trade-off**
 3. Provide a **modular, provider-agnostic architecture**
-4. Support **multi-language parallel output**
+4. Support **multi-language parallel output** (German, Arabic, English)
 5. Validate **professional hardware integration feasibility**
 
 ---
@@ -51,6 +51,8 @@ Neural TTS
 PCM Audio Output
    ↓
 Dante / Professional Hardware Routing
+```
+<p align="center"> <img src="https://github.com/AbdelrahmanMohamed54/Bachelor-Thesis/blob/main/latex_source_code/img/figures/system_architecture_diagram.drawio.svg" alt="abdelrahmanmohamed54" /> </p>
 ```
 
 ### Key Architectural Features
@@ -75,6 +77,8 @@ This project introduces a **segmentation control layer** that:
 * Applies a dynamic token threshold to bound latency
 * Enforces a stability window before translation
 * Minimizes output erasure and instability
+
+<p align="center"> <img src="https://github.com/AbdelrahmanMohamed54/Bachelor-Thesis/blob/main/latex_source_code/img/figures/segment_flow.drawio.svg" alt="abdelrahmanmohamed54" /> </p>
 
 This explicitly manages the **latency vs stability trade-off**, a critical challenge in real-time interpretation.
 
@@ -108,11 +112,19 @@ Ablation studies were conducted to analyze:
 
 ## 🎛 Hardware Integration
 
+**Traditional Hardware Integratiion:**
+
+<p align="center"> <img src="https://github.com/AbdelrahmanMohamed54/Bachelor-Thesis/blob/main/latex_source_code/img/figures/signal_chain.drawio.svg" alt="abdelrahmanmohamed54" /> </p>
+
+---
+
 The system was experimentally validated with:
 
 * **Bosch Integrus professional interpretation hardware**
 * **Dante Virtual Soundcard**
 * Up to **8 parallel language channels**
+
+<p align="center"> <img src="https://github.com/AbdelrahmanMohamed54/Bachelor-Thesis/blob/main/latex_source_code/img/figures/dante_layer.drawio.svg" alt="abdelrahmanmohamed54" /> </p>
 
 Key properties:
 
