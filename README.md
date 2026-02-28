@@ -1,7 +1,9 @@
 # 🎧 AI-Based Real-Time Interpretation System
 
-**Bachelor Thesis Prototype**
+**This is the repo for my bachelor thesis on the topic of:**
 Development and Evaluation of an AI-Based Real-Time Interpretation System with Hardware Integration Feasibility
+
+**Note:** Since tis Thesis contains more than what is illustrated here and was conducted over several months, it is highly recommended to refer to, or read the full thesis document, or relevant parts depending on your needs, which can be found <a href="https://github.com/AbdelrahmanMohamed54/Bachelor-Thesis/blob/main/complete_final_thesis.pdf">here</a>.
 
 ---
 
