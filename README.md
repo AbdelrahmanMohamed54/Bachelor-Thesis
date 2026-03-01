@@ -163,6 +163,12 @@ This demonstrates feasibility beyond software-only prototypes.
 
 # 🏆 Summary
 
-This project demonstrates that:
+This thesis investigated the design and evaluation of a real-time AI-based simultaneous interpretation system, focusing on system-level orchestration, latency control, and professional deployment feasibility. By integrating streaming Automatic Speech Recognition (ASR), Neural Machine Translation (NMT), and Neural Text-to-Speech (TTS) within a modular architecture, the system demonstrated that real-time speech-to-speech interpretation is technically achievable under practical constraints.
 
-> Real-time AI-based simultaneous interpretation is feasible when system-level latency control, stability-aware segmentation, and professional hardware integration are explicitly addressed.
+A central contribution of this work is the stability-aware segmentation strategy, which explicitly manages the latency–stability trade-off inherent in streaming ASR systems. The evaluation, conducted using latency metrics such as AL, LAAL, RTF, FTL, and TTFA, alongside stability metrics including Flicker Rate, Normalized Erasure, and Consecutive Wait, showed that controlled segmentation significantly improves output reliability without compromising responsiveness.
+
+The results highlight that overall system performance depends more strongly on orchestration, buffering strategies, and latency management than on the specific choice of AI models. Additionally, the feasibility study confirmed that AI-generated PCM audio can be successfully integrated into professional interpretation environments using Dante and Bosch Integrus hardware without introducing significant additional latency.
+
+Remaining challenges include dependency on cloud-based APIs, sensitivity to network conditions, and the absence of large-scale user perception studies. Future improvements may focus on adaptive latency control, edge deployment, and deeper hardware-level integration.
+
+Overall, the findings demonstrate that AI-driven simultaneous interpretation systems can move beyond software prototypes toward deployable, conference-grade solutions when latency, stability, and system integration are addressed holistically.
